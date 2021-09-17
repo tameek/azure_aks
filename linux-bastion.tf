@@ -44,16 +44,16 @@ resource "azurerm_virtual_machine" "avm" {
   }
 
   os_profile {
-    computer_name  = "bastion.aks.thetaraycs.com"
-    admin_username = "deploy"
-    admin_password = "&#($HEWP)token"
+    computer_name  = var.computername
+    admin_username = var.adminuser
+    admin_password = var.adminpassword
   }
 
   os_profile_linux_config {
     disable_password_authentication = false
       ssh_keys {
-    key_data = file("/Users/tameekhenderson/.ssh/id_rsa.pub")
-    path = "/home/deploy/.ssh/authorized_keys"
+    key_data = file("$HOME/.ssh/id_rsa.pub")
+    path = "$HOME/.ssh/authorized_keys"
     }
   }
 
